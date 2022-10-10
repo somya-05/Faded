@@ -13,3 +13,4 @@ mongoose.connect("mongodb://localhost:27017/techtatva",{
 );
 
 const UserSchema = require("./userSchema");
+const questSchema = require("./questSchema");

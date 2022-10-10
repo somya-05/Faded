@@ -2,7 +2,9 @@ const connection = require("./models");
 const express = require("express");
 const application = express();
 const path = require("path");
-const expressHandleBars = require("express-handlebars");
+
+const expressHandleBars = require('express-handlebars');
+
 const bodyparser = require("body-parser");
 const controller = require("./controller/mainpage");
 
@@ -19,7 +21,8 @@ application.engine(
     extname: "hbs",
     defaultLayout: "mainlayout",
     layoutsDir: __dirname + "/views/layouts",
-  })
+
+  }),
 );
 application.set("view engine", "hbs");
 
