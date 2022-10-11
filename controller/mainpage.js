@@ -1,3 +1,4 @@
+const { request } = require("express");
 const express = require("express");
 const mongoose = require("mongoose");
 const router = express.Router();
@@ -18,15 +19,28 @@ router.get("/registerpage", (req, res) => {
 
       res.render("registerpage", {});
 });
-router.post("/login", (req, res) => {
-  var gotUsername = req.body.username;
-  var gotPass = req.body.password;
+router.get("/teampage", (req, res) => {
 
-  userModel.findOne({ username: gotUsername }, (err, docs) => {
+  res.render("teampage", {});
+});
+router.get("/teampage", (req, res) => {
+
+  res.render("teampage", {});
+});
+router.get("/rulebook", (req, res) => {
+
+  res.render("rulebook", {});
+});
+router.post("/login", (req, res) => {
+  var gotEmailid = req.body.emailid;
+  var gotPass = req.body.password;
+  console.log("req.body: ", req.body)
+  userModel.findOne({ emailid: gotEmailid }, (err, docs) => {
+    console.log("err ", err);
     if (!err) {
       if (docs) {
         // check is password is correct, if not show error and send to error page
-
+        console.log("docs: ",docs);
         if(gotPass == docs.password){
           res.render("profile",{data : docs});
 
@@ -48,19 +62,24 @@ router.post("/login", (req, res) => {
 
 
 router.post("/register", (req, res) => {
-  var gotUsername = req.body.username;
+  var gotEmailid = req.body.username;
   var gotPass = req.body.password;
-  var gotTeamID = req.body.TeamID;
-  userModel.findOne({ username: gotUsername }, (err, docs) => {
+  var gotRePass= req.body.re_password;
+  if(gotPass==gotRePass){
+  userModel.findOne({ username: gotEmailid }, (err, docs) => {
     if (!err) {
       if (docs) {
         // username already exists
         res.render("error", {});
       } else {
         const newUser = new userDocument({
-            username: gotUsername,
+            username: gotEmailid,
             password: gotPass,
-            TeamID: gotTeamID
+            fullname: req.body.fullname,
+            registration: req.body.regno,
+            emailid: req.body.emailid,
+            semester: req.body.semester,
+            collegename: req.body.colleges
           });
           newUser.save();
           res.render("profile",{data : docs});
@@ -70,6 +89,10 @@ router.post("/register", (req, res) => {
       console.log("Got an error");
     }
   });
+}
+else{
+  res.render("registerpage",{error:"passwords don't match"});
+}
 });
 
 module.exports = router;

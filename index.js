@@ -11,13 +11,14 @@ application.use(
     extended: true,
   })
 );
+application.use(express.static(__dirname+'/public'));
 
 application.set("views", path.join(__dirname, "/views/"));
 application.engine(
   "hbs",
   expressHandleBars.engine({
     extname: "hbs",
-    defaultLayout: "mainlayout",
+    defaultLayout: "indexLayout",
     layoutsDir: __dirname + "/views/layouts",
   })
 );

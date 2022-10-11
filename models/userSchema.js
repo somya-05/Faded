@@ -12,10 +12,27 @@ var userSchema = mongoose.Schema({
     type : String,
     required : "Required"
    },
-   TeamID:{
-    type : Number,
-    required : "Required"
-   }
+   fullname:{
+      type: String,
+      required: "Required"
+   },
+   registration:{
+      type: String,
+      required: "Required"
+   },
+   emailid:{
+      type: String,
+      required: "Required"
+   },
+   semester:{
+      type: Number,
+      required: "Required"
+   },
+   collegename:{
+      type: String,
+      required: "Required"
+   },
+   
 
 
 });
