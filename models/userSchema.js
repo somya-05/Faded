@@ -24,6 +24,10 @@ var userSchema = mongoose.Schema({
       type: String,
       required: "Required"
    },
+   teamid:{
+      type:String,
+      required:"Required"
+   },
    semester:{
       type: Number,
       required: "Required"
